@@ -48,9 +48,11 @@ internal class Program
         }
 
 
-        double[,] modelArr = SetModel();
+        //double[,] modelArr = SetModel();
 
         //next need to solve the array with dual phase simplex, then add a feature where if its already sovled you input "sovled values" or Xbv values
+        //or just use that for the original values so that you can place it in the matrix
+        //
 
     }
 
@@ -64,7 +66,7 @@ internal class Program
         int tempColCount = 0;
         int tempRowCount = 0;
         string temp;
-        for (int i = 0; i < desVar; i++)
+        for (int i = 0; i < desVar; i++) //getting heading values
         {
             headingArr[i] = "x" + (i + 1);
         }
