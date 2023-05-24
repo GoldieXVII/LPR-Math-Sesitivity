@@ -47,72 +47,17 @@ internal class Program
             DisplayMatrix(inverseMatrix);
         }
 
-
-        //double[,] modelArr = SetModel();
-
+        /*Console.WriteLine("How many decision variables do you have?");
+        int desVar = Convert.ToInt32(Console.ReadLine()); //column num
+        Console.WriteLine("How many constraits are there");
+        int consNum = Convert.ToInt32(Console.ReadLine()) * 2; //row num times by two for s and e var
+        double[,] modelArr = SetModel(desVar, consNum);
+        string[] headings = getHeadings(desVar, consNum);
+        */
         //next need to solve the array with dual phase simplex, then add a feature where if its already sovled you input "sovled values" or Xbv values
         //or just use that for the original values so that you can place it in the matrix
         //
 
-    }
-
-    private static double [,] SetModel ()
-    {
-        Console.WriteLine("How many decision variables do you have?");
-        int desVar = Convert.ToInt32(Console.ReadLine()); //column num
-        Console.WriteLine("How many constraits are there");
-        int consNum = Convert.ToInt32(Console.ReadLine()) * 2; //row num times by two for s and e var
-        string[] headingArr = new string[consNum];
-        int tempColCount = 0;
-        int tempRowCount = 0;
-        string temp;
-        for (int i = 0; i < desVar; i++) //getting heading values
-        {
-            headingArr[i] = "x" + (i + 1);
-        }
-        for (int i = desVar; i < consNum; i++)
-        {
-            Console.WriteLine("Enter sign for constraint: " + i);
-            temp = Console.ReadLine();
-            if (temp == "<=")
-            {
-                headingArr[i] = "s" + (i + 1);
-            }
-            else if (temp == ">=")
-            {
-                headingArr[i] = "e" + (i + 1);
-            }
-            else if (temp == "=")
-            {
-                headingArr[i] = "e" + (i + 1);
-                tempColCount++;
-                tempRowCount++;
-            }
-        }
-
-        desVar += tempColCount;
-        consNum += tempRowCount;
-
-        double[,] conicalArr = new double[desVar, consNum];
-
-        Console.WriteLine("What are the coeffients for the objective function?");
-        for (int i = 0; i <= desVar; i++)
-        {
-            Console.WriteLine("Enter coeffient for variable: " + i);
-            conicalArr[i - 1, 0] = Convert.ToInt32(Console.ReadLine());
-        }
-
-        Console.WriteLine("What are the coeffients for the constraints?");
-        for (int i = 1; i <= desVar; i++)
-        {
-            for (int j = 0; j < consNum; j++)
-            {
-                Console.WriteLine("Enter coeffient for constraint variable: " + i + " " + j);
-                conicalArr[i, j] = Convert.ToInt32(Console.ReadLine());
-            }
-        }
-
-        return conicalArr;
     }
 
     private static double[,] SetMatrix(int row, int col)
@@ -244,6 +189,67 @@ internal class Program
             }
         }
         return transposeMatrix;
+    }
+
+    private static string[] getHeadings(int desVar, int consNum)
+    {
+        string[] headingArr = new string[consNum];
+        int tempColCount = 0;
+        int tempRowCount = 0;
+        string temp;
+        for (int i = 0; i < desVar; i++) //getting heading values
+        {
+            headingArr[i] = "x" + (i + 1);
+        }
+        for (int i = desVar; i < consNum; i++)
+        {
+            Console.WriteLine("Enter sign for constraint: " + i);
+            temp = Console.ReadLine();
+            if (temp == "<=")
+            {
+                headingArr[i] = "s" + (i + 1);
+            }
+            else if (temp == ">=")
+            {
+                headingArr[i] = "e" + (i + 1);
+            }
+            else if (temp == "=")
+            {
+                headingArr[i] = "e" + (i + 1);
+                tempColCount++;
+                tempRowCount++;
+            }
+        }
+        return headingArr;
+    }
+
+    private static double[,] SetModel(int desVar, int consNum)
+    {
+        int tempColCount = 0;
+        int tempRowCount = 0;
+        desVar += tempColCount;
+        consNum += tempRowCount;
+
+        double[,] conicalArr = new double[desVar, consNum];
+
+        Console.WriteLine("What are the coeffients for the objective function?");
+        for (int i = 0; i <= desVar; i++)
+        {
+            Console.WriteLine("Enter coeffient for variable: " + i);
+            conicalArr[i - 1, 0] = Convert.ToInt32(Console.ReadLine());
+        }
+
+        Console.WriteLine("What are the coeffients for the constraints?");
+        for (int i = 1; i <= desVar; i++)
+        {
+            for (int j = 0; j < consNum; j++)
+            {
+                Console.WriteLine("Enter coeffient for constraint variable: " + i + " " + j);
+                conicalArr[i, j] = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+
+        return conicalArr;
     }
 
 }
