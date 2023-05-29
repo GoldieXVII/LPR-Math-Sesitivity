@@ -4,6 +4,10 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        //need to do error handling when entering data
+        
+        GettingDate getData = new GettingDate();
+
         Console.WriteLine("Enter Matrix Size");
         int row=0;
         int col=0;
@@ -47,16 +51,24 @@ internal class Program
             DisplayMatrix(inverseMatrix);
         }
 
-        /*Console.WriteLine("How many decision variables do you have?");
+        Console.WriteLine("How many decision variables do you have?");
         int desVar = Convert.ToInt32(Console.ReadLine()); //column num
         Console.WriteLine("How many constraits are there");
         int consNum = Convert.ToInt32(Console.ReadLine()) * 2; //row num times by two for s and e var
+        
+        //original lp
         double[,] modelArr = SetModel(desVar, consNum);
-        string[] headings = getHeadings(desVar, consNum);
-        */
-        //next need to solve the array with dual phase simplex, then add a feature where if its already sovled you input "sovled values" or Xbv values
-        //or just use that for the original values so that you can place it in the matrix
-        //
+        string[] headings = GetHeadings(desVar, consNum);
+
+        //solved lp
+        double[,] solvedArr = SetModel(desVar, consNum);
+
+        //Entering XBv value headings
+        string[] xbv = getXbvHeadings();
+
+        //wont be able to easily solve the matrix with dual phase in C#
+        // going to have it so that you just enter the original and then the solved, so that you can get all the answers that you need
+
 
     }
 
@@ -191,7 +203,7 @@ internal class Program
         return transposeMatrix;
     }
 
-    private static string[] getHeadings(int desVar, int consNum)
+    private static string[] GetHeadings(int desVar, int consNum)
     {
         string[] headingArr = new string[consNum];
         int tempColCount = 0;
@@ -250,6 +262,21 @@ internal class Program
         }
 
         return conicalArr;
+    }
+
+    public static string [] getXbvHeadings()
+    {
+        Console.WriteLine("Enter how many basic variables there are");
+        int numXbvValues = Convert.ToInt32(Console.ReadLine());
+        string[] xbvValue = new string[numXbvValues];
+
+        for(int i = 0; i < numXbvValues; i++)
+        {
+            Console.WriteLine("Enter the heading of the Basic Variable");
+            xbvValue[i] = Console.ReadLine();
+        }
+
+        return xbvValue;
     }
 
 }
