@@ -13,7 +13,7 @@ namespace Matric_Prelims
         public double[,] SetModel(int desVar, int consNum)
         {
 
-            double[,] conicalArr = new double[consNum, desVar];
+            double[,] conicalArr = new double[desVar, consNum];
 
             Console.WriteLine("What are the coeffients for the objective function?");
             for (int i = 0; i < desVar; i++)
