@@ -66,7 +66,13 @@ internal class Program
         double[,] solvedArr = getData.SetModel(desVar, consNum);
 
         //Entering XBv value headings
-        string[] xbv = getXbvHeadings();
+        getData.DisplayHeadings(headings);
+        DisplayMatrix(modelArr);
+        getData.DisplayHeadings(headings);
+        DisplayMatrix(solvedArr);
+        string[] xbv = getData.GetXbvHeadings();
+        double[,] bVal = getData.GetBValues(desVar, consNum, headings, xbv);
+
 
         //wont be able to easily solve the matrix with dual phase in C#
         // going to have it so that you just enter the original and then the solved, so that you can get all the answers that you need
@@ -104,20 +110,4 @@ internal class Program
             Console.WriteLine();
         }
     }
-
-    public static string [] getXbvHeadings()
-    {
-        Console.WriteLine("Enter how many basic variables there are");
-        int numXbvValues = Convert.ToInt32(Console.ReadLine());
-        string[] xbvValue = new string[numXbvValues];
-
-        for(int i = 0; i < numXbvValues; i++)
-        {
-            Console.WriteLine("Enter the heading of the Basic Variable");
-            xbvValue[i] = Console.ReadLine();
-        }
-
-        return xbvValue;
-    }
-
 }

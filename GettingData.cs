@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,17 @@ namespace Matric_Prelims
             return headingArr;
         }
 
+        public void DisplayHeadings(string[] heading)
+        {
+            
+            int temp = heading.Length;
+
+            for (int i = 0; i < temp; i++)
+            {
+                Console.Write(heading[i] + "\t");
+            }
+        }
+
         public double[,] SetModel(int desVar, int consNum)
         {
             int tempColCount = 0;
@@ -70,7 +82,7 @@ namespace Matric_Prelims
             return conicalArr;
         }
 
-        public string[] getXbvHeadings()
+        public string[] GetXbvHeadings()
         {
             Console.WriteLine("Enter how many basic variables there are");
             int numXbvValues = Convert.ToInt32(Console.ReadLine());
@@ -85,5 +97,33 @@ namespace Matric_Prelims
             return xbvValue;
         }
 
+        public double[,] GetBValues(int desVar, int consNum, string[] headings, string [] headingLook)
+        {
+            
+
+            int length = headingLook.Length;
+            int [] valPlace =new int[length];
+            int k = 0;
+
+            for (int i = 0; i < length; i++)
+            {
+                string currentVal = headingLook[i];
+
+                for (int j = 0; j < headings.Length; j++)
+                {
+                    if (headings[j]==currentVal)
+                    {
+                        valPlace[k] = j;
+                        k++;
+                    }
+                }
+            }
+
+            double[,] bVal = new double[length, consNum-1];
+
+
+
+            return bVal;
+        }
     }
 }
