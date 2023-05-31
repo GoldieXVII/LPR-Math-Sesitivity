@@ -10,6 +10,31 @@ namespace Matric_Prelims
     internal class GettingData
     {
 
+        public double[,] SetModel(int desVar, int consNum)
+        {
+
+            double[,] conicalArr = new double[consNum, desVar];
+
+            Console.WriteLine("What are the coeffients for the objective function?");
+            for (int i = 0; i < desVar; i++)
+            {
+                Console.WriteLine("Enter coeffient for variable: " + i);
+                conicalArr[i, 0] = Convert.ToDouble(Console.ReadLine());
+            }
+
+            Console.WriteLine("What are the coeffients for the constraints?");
+            for (int m = 1; m < consNum; m++)
+            {
+                for (int j = 0; j < desVar; j++)
+                {
+                    Console.WriteLine("Enter coeffient for constraint variable: " + m + " " + j);
+                    conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
+                }
+            }
+
+            return conicalArr;
+        }
+
         public string[] GetHeadings(int desVar, int consNum)
         {
             string[] headingArr = new string[consNum];
@@ -53,35 +78,6 @@ namespace Matric_Prelims
             }
         }
 
-        public double[,] SetModel(int desVar, int consNum)
-        {
-            int tempColCount = 0;
-            int tempRowCount = 0;
-            desVar += tempColCount;
-            consNum += tempRowCount;
-
-            double[,] conicalArr = new double[desVar, consNum];
-
-            Console.WriteLine("What are the coeffients for the objective function?");
-            for (int i = 0; i <= desVar; i++)
-            {
-                Console.WriteLine("Enter coeffient for variable: " + i);
-                conicalArr[i - 1, 0] = Convert.ToInt32(Console.ReadLine());
-            }
-
-            Console.WriteLine("What are the coeffients for the constraints?");
-            for (int i = 1; i <= desVar; i++)
-            {
-                for (int j = 0; j < consNum; j++)
-                {
-                    Console.WriteLine("Enter coeffient for constraint variable: " + i + " " + j);
-                    conicalArr[i, j] = Convert.ToInt32(Console.ReadLine());
-                }
-            }
-
-            return conicalArr;
-        }
-
         public string[] GetXbvHeadings()
         {
             Console.WriteLine("Enter how many basic variables there are");
@@ -97,7 +93,7 @@ namespace Matric_Prelims
             return xbvValue;
         }
 
-        public double[,] GetBValues(int desVar, int consNum, string[] headings, string [] headingLook)
+        public double[,] GetBValues(int desVar, int consNum, string[] headings, string [] headingLook, double[,] orArr)
         {
             
 
@@ -121,7 +117,21 @@ namespace Matric_Prelims
 
             double[,] bVal = new double[length, consNum-1];
 
-
+            for(int m = 0; m < valPlace.Length; m++)
+            {
+                for (int i = 0; i < orArr.Length; i++)
+                {
+                    if (valPlace[m] == i)
+                    {
+                        for (int j = 0; j <= consNum - 1; j++)
+                        {
+                            bVal[m,j] = orArr[i,j];
+                        }
+                    }
+                    
+                }
+            }
+            
 
             return bVal;
         }

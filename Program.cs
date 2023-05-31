@@ -9,7 +9,7 @@ internal class Program
         GettingData getData = new GettingData();
         MatrixMaths matrixMaths = new MatrixMaths();
 
-        Console.WriteLine("Enter Matrix Size");
+        /*Console.WriteLine("Enter Matrix Size");
         int row=0;
         int col=0;
         string temp;
@@ -50,12 +50,14 @@ internal class Program
             double[,] inverseMatrix = matrixMaths.GetInverseMatrix(transposedMatrix, det);
             Console.WriteLine("Inverse Matrix:");
             DisplayMatrix(inverseMatrix);
-        }
+        }*/
+        //commented out to test getting Xbv Values
+        //Will add the lp that im using to test later
 
         Console.WriteLine("How many decision variables do you have?");
-        int desVar = Convert.ToInt32(Console.ReadLine()); //column num
+        int desVar = Convert.ToInt32(Console.ReadLine()) * 2; //column num
         Console.WriteLine("How many constraits are there");
-        int consNum = Convert.ToInt32(Console.ReadLine()) * 2; //row num times by two for s and e var
+        int consNum = Convert.ToInt32(Console.ReadLine()); //row num times by two for s and e var
         
         //original lp
         double[,] modelArr = getData.SetModel(desVar, consNum);
@@ -71,7 +73,7 @@ internal class Program
         getData.DisplayHeadings(headings);
         DisplayMatrix(solvedArr);
         string[] xbv = getData.GetXbvHeadings();
-        double[,] bVal = getData.GetBValues(desVar, consNum, headings, xbv);
+        double[,] bVal = getData.GetBValues(desVar, consNum, headings, xbv, modelArr);
 
 
         //wont be able to easily solve the matrix with dual phase in C#
