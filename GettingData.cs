@@ -13,13 +13,13 @@ namespace Matric_Prelims
         public double[,] SetModel(int desVar, int consNum)
         {
 
-            double[,] conicalArr = new double[desVar, consNum];
+            double[,] conicalArr = new double[consNum, desVar];
 
             Console.WriteLine("What are the coeffients for the objective function?");
             for (int i = 0; i < desVar; i++)
             {
                 Console.WriteLine("Enter coeffient for variable: " + i);
-                conicalArr[i, 0] = Convert.ToDouble(Console.ReadLine());
+                conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
             }
 
             Console.WriteLine("What are the coeffients for the constraints?");
@@ -37,33 +37,14 @@ namespace Matric_Prelims
 
         public string[] GetHeadings(int desVar, int consNum)
         {
-            string[] headingArr = new string[consNum];
-            int tempColCount = 0;
-            int tempRowCount = 0;
-            string temp;
-            for (int i = 0; i < desVar; i++) //getting heading values
+            string[] headingArr = new string[desVar];
+
+            for (int i = 0; i < desVar; i++)
             {
-                headingArr[i] = "x" + (i + 1);
+                Console.WriteLine("Enter Variable Heading for: " + i);
+                headingArr[i] = Console.ReadLine();
             }
-            for (int i = desVar; i < consNum; i++)
-            {
-                Console.WriteLine("Enter sign for constraint: " + i);
-                temp = Console.ReadLine();
-                if (temp == "<=")
-                {
-                    headingArr[i] = "s" + (i + 1);
-                }
-                else if (temp == ">=")
-                {
-                    headingArr[i] = "e" + (i + 1);
-                }
-                else if (temp == "=")
-                {
-                    headingArr[i] = "e" + (i + 1);
-                    tempColCount++;
-                    tempRowCount++;
-                }
-            }
+
             return headingArr;
         }
 
@@ -131,8 +112,6 @@ namespace Matric_Prelims
                     
                 }
             }
-            
-
             return bVal;
         }
     }
