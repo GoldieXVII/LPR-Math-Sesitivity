@@ -69,6 +69,7 @@ namespace Matric_Prelims
             {
                 Console.Write(heading[i] + "\t");
             }
+            Console.WriteLine();
         }
 
         public string[] GetXbvHeadings()
@@ -116,7 +117,7 @@ namespace Matric_Prelims
                 {
                     if (valPlace[m] == i)
                     {
-                        for (int j = 0; j <= consNum - 1; j++)
+                        for (int j = 0; j < consNum - 1; j++)
                         {
                             bVal[m,j] = orArr[i,j];
                         }

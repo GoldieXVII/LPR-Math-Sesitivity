@@ -61,23 +61,16 @@ internal class Program
         //original lp
         double[,] modelArr = getData.SetModel(desVar, consNum);
         string[] headings = getData.GetHeadings(desVar, consNum);
-        
-
-        //solved lp
-        double[,] solvedArr = getData.SetModel(desVar, consNum);
 
         //Entering XBv value headings
         getData.DisplayHeadings(headings);
-        DisplayMatrix(modelArr);
-        getData.DisplayHeadings(headings);
-        DisplayMatrix(solvedArr);
+        DisplayMatrix(modelArr);;
         string[] xbv = getData.GetXbvHeadings();
         double[,] bVal = getData.GetBValues(desVar, consNum, headings, xbv, modelArr);
+        DisplayMatrix(bVal);
 
 
         //wont be able to easily solve the matrix with dual phase in C#
-        // going to have it so that you just enter the original and then the solved, so that you can get all the answers that you need
-
 
     }
 
