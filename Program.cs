@@ -52,7 +52,6 @@ internal class Program
             DisplayMatrix(inverseMatrix);
         }*/
         //commented out to test getting Xbv Values
-        //Will add the lp that im using to test later
 
         Console.WriteLine("How many decision variables do you have?");
         int desVar = Convert.ToInt32(Console.ReadLine()) * 2; //column num

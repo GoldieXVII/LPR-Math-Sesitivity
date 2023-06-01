@@ -48,6 +48,18 @@ namespace Matric_Prelims
             return headingArr;
         }
 
+        public double [,] GetbValues (int consNum)
+        {
+            double[,] bVal = new double[consNum, 1];
+            
+            for (int i = 0; i < consNum; i++)
+            {
+                bVal[i, 0] = Convert.ToDouble(Console.ReadLine());
+            }
+
+            return bVal;
+        }
+
         public void DisplayHeadings(string[] heading)
         {
             
