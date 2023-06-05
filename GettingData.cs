@@ -109,23 +109,44 @@ namespace Matric_Prelims
                 }
             }
 
-            double[,] bVal = new double[consNum-1, length];
+            double[,] bVal = new double[consNum, length];
             k = 0;
+            double temp = 0;
 
-            for(int m = 0; m < valPlace.Length; m++)
+            while (k < length)
             {
-                for (int i = 0; i < desVar; i++)
+                for (int m = 0; m < valPlace.Length; m++)
                 {
-                    if (valPlace[m] == i)
+                    for (int i = 0; i < consNum; i++)
                     {
-                        for (int j = 0; j < desVar; j++)
+                        if (valPlace[m] == i)
                         {
-                            bVal[k,j] = orArr[i,j];
+                            for (int j = 0; j < desVar; j++)
+                            {
+                                temp = orArr[i, j];
+                                bVal[k, i] = temp;
+                            }
+                            k++;
                         }
-                        k++;
                     }
                 }
             }
+
+            //for(int m = 0; m < valPlace.Length; m++)
+            //{
+            //    for (int i = 0; i < consNum; i++)
+            //    {
+            //        if (valPlace[m] == i)
+            //        {
+            //            for (int j = 0; j < desVar; j++)
+            //            {
+            //                temp = orArr[i, j];
+            //                bVal[k, i] = temp;
+            //            }
+            //            k++;
+            //        }
+            //    }
+            //}
             return bVal;
         }
     }
