@@ -115,11 +115,11 @@ namespace Matric_Prelims
 
             for (int m = 0; m < valPlace.Length; m++)
             {
-                for (int i = 0; i < consNum; i++)
+                for (int i = 0; i < desVar; i++)
                 {
                     if (valPlace[m] == i)
                     {
-                        for (int j = 0; j < desVar; j++)
+                        for (int j = 0; j < consNum-1; j++)
                         {
                             temp = orArr[i, j];
                             bVal[k-1, j] = temp;
@@ -128,8 +128,6 @@ namespace Matric_Prelims
                     }
                 }
             }
-
-
             return bVal;
         }
     }
