@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Matric_Prelims
 {
@@ -87,12 +88,10 @@ namespace Matric_Prelims
             return xbvValue;
         }
 
-        public double[,] GetBValues(int desVar, int consNum, string[] headings, string [] headingLook, double[,] orArr)
+        private int[] gettingIndicies(string[] headings, string [] headingLook)
         {
-            
-
             int length = headingLook.Length;
-            int [] valPlace =new int[length];
+            int[] valPlace = new int[length];
             int k = 0;
 
             for (int i = 0; i < length; i++)
@@ -101,7 +100,7 @@ namespace Matric_Prelims
 
                 for (int j = 0; j < headings.Length; j++)
                 {
-                    if (headings[j]==currentVal)
+                    if (headings[j] == currentVal)
                     {
                         valPlace[k] = j;
                         k++;
@@ -109,19 +108,37 @@ namespace Matric_Prelims
                 }
             }
 
-            double[,] bVal = new double[consNum, length];
-            k = 1;
-            double temp = 0;
+            for (int i = 0; i < valPlace.Length; i++)
+            {
+                Console.WriteLine(valPlace[i]);
+            }
 
-            for (int m = 0; m < valPlace.Length; m++)
+            return valPlace;
+
+            
+        }
+
+        public double[,] GetBValues(int desVar, int consNum, string[] headings, string [] headingLook, double[,] orArr)
+        {
+            
+
+            int [] indicies = gettingIndicies(headings, headingLook);
+            int length = indicies.Length;
+
+            double[,] bVal = new double[consNum, length];
+            int k = 1;
+            double temp = 0;
+            //Console.WriteLine(desVar);
+            for (int m = 0; m < indicies.Length; m++)
             {
                 for (int i = 0; i < desVar; i++)
                 {
-                    if (valPlace[m] == i)
+                    if (indicies[m] == i)
                     {
                         for (int j = 0; j < consNum-1; j++)
                         {
                             temp = orArr[i, j];
+                            //Console.WriteLine(temp);
                             bVal[k-1, j] = temp;
                         }
                         k++;
@@ -129,6 +146,17 @@ namespace Matric_Prelims
                 }
             }
             return bVal;
+        }
+
+        public double[,] GetTableAns(int consNum)
+        {
+            double[,] ansVal = new double[consNum, 1];
+            for (int i = 0; i < consNum; i++)
+            {
+                Console.WriteLine("Enter answer for constraint: " + i);
+                ansVal[i, 1] = Convert.ToDouble(Console.ReadLine());
+            }
+            return ansVal;
         }
     }
 }
