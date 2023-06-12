@@ -108,11 +108,6 @@ namespace Matric_Prelims
                 }
             }
 
-            for (int i = 0; i < valPlace.Length; i++)
-            {
-                Console.WriteLine(valPlace[i]);
-            }
-
             return valPlace;
             
         }
