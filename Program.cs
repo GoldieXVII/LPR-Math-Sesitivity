@@ -66,7 +66,9 @@ internal class Program
         getData.DisplayHeadings(headings);
         DisplayMatrix(modelArr);;
         string[] xbv = getData.GetXbvHeadings();
-        double[,] bVal = getData.GetBValues(desVar, consNum, headings, xbv, modelArr);
+        double[,] bVal = getData.GetBValues(headings, xbv, modelArr);
+        Console.WriteLine();
+        Console.WriteLine();
         DisplayMatrix(bVal);
 
 

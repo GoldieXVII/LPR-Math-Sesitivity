@@ -114,38 +114,29 @@ namespace Matric_Prelims
             }
 
             return valPlace;
-
             
         }
 
-        public double[,] GetBValues(int desVar, int consNum, string[] headings, string [] headingLook, double[,] orArr)
+        public double[,] GetBValues(string[] headings, string [] headingLook, double[,] orArr)
         {
-            
-
+         
             int [] indicies = gettingIndicies(headings, headingLook);
-            int length = indicies.Length;
+            int rows = indicies.GetLength(0)-1;
+            int columns = indicies.Length;
 
-            double[,] bVal = new double[consNum, length];
-            int k = 1;
-            double temp = 0;
-            //Console.WriteLine(desVar);
-            for (int m = 0; m < indicies.Length; m++)
+            double[,] bVal = new double[rows, columns];
+
+            for (int c = 0; c < columns; c++)
             {
-                for (int i = 0; i < desVar; i++)
+                int columnIndex = indicies[c];
+                for (int r = 1; r < rows; r++)
                 {
-                    if (indicies[m] == i)
-                    {
-                        for (int j = 0; j < consNum-1; j++)
-                        {
-                            temp = orArr[i, j];
-                            //Console.WriteLine(temp);
-                            bVal[k-1, j] = temp;
-                        }
-                        k++;
-                    }
+                    bVal[r - 1, c] = orArr[r, columnIndex];
                 }
             }
+
             return bVal;
+
         }
 
         public double[,] GetTableAns(int consNum)
