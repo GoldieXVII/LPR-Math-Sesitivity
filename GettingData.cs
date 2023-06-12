@@ -117,11 +117,11 @@ namespace Matric_Prelims
             
         }
 
-        public double[,] GetBValues(string[] headings, string [] headingLook, double[,] orArr)
+        public double[,] GetBValues(string[] headings, string [] headingLook, double[,] orArr, int consNum)
         {
          
             int [] indicies = gettingIndicies(headings, headingLook);
-            int rows = indicies.GetLength(0)-1;
+            int rows = consNum-1;
             int columns = indicies.Length;
 
             double[,] bVal = new double[rows, columns];
@@ -129,9 +129,9 @@ namespace Matric_Prelims
             for (int c = 0; c < columns; c++)
             {
                 int columnIndex = indicies[c];
-                for (int r = 1; r < rows; r++)
+                for (int r = 0; r < rows; r++)
                 {
-                    bVal[r - 1, c] = orArr[r, columnIndex];
+                    bVal[r, c] = orArr[r+1, columnIndex];
                 }
             }
 

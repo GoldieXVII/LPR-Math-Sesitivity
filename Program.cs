@@ -54,9 +54,9 @@ internal class Program
         //commented out to test getting Xbv Values
 
         Console.WriteLine("How many decision variables do you have?");
-        int desVar = Convert.ToInt32(Console.ReadLine()) * 2; //column num
+        int desVar = Convert.ToInt32(Console.ReadLine()) * 2; //row num times by two for s and e var
         Console.WriteLine("How many constraits are there");
-        int consNum = Convert.ToInt32(Console.ReadLine())+1; //row num times by two for s and e var
+        int consNum = Convert.ToInt32(Console.ReadLine())+1; //column num
         
         //original lp
         double[,] modelArr = getData.SetModel(desVar, consNum);
@@ -66,7 +66,7 @@ internal class Program
         getData.DisplayHeadings(headings);
         DisplayMatrix(modelArr);;
         string[] xbv = getData.GetXbvHeadings();
-        double[,] bVal = getData.GetBValues(headings, xbv, modelArr);
+        double[,] bVal = getData.GetBValues(headings, xbv, modelArr, consNum);
         Console.WriteLine();
         Console.WriteLine();
         DisplayMatrix(bVal);
