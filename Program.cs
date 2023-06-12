@@ -38,17 +38,23 @@ internal class Program
         DisplayMatrix(transposedMatrix);
 
         double det = matrixMaths.GetDeterminant(bVal, n);
+        double[,] inverseMatrix = null;
         Console.WriteLine("Determinant: " + det);
         if (det == 0)
         {
             Console.WriteLine("Inverse does not exist. Matrix is not invertible.");
+            Environment.Exit(0);
         }
         else
         {
-            double[,] inverseMatrix = matrixMaths.GetInverseMatrix(transposedMatrix, det);
+            inverseMatrix = matrixMaths.GetInverseMatrix(transposedMatrix, det);
             Console.WriteLine("Inverse Matrix:");
             DisplayMatrix(inverseMatrix);
         }
+
+        double[] cbv = getData.getCBv(headings, xbv, modelArr);
+        double[] cbvb1 = getData.GetCBVB1(cbv, inverseMatrix);
+
 
     }
 
