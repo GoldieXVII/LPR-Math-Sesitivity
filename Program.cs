@@ -10,7 +10,7 @@ internal class Program
         MatrixMaths matrixMaths = new MatrixMaths();
         
         Console.WriteLine("How many decision variables do you have?");
-        int desVar = Convert.ToInt32(Console.ReadLine()) * 2; //row num times by two for s and e var
+        int desVar = Convert.ToInt32(Console.ReadLine()) * 2 + 1; //row num times by two for s and e var
         Console.WriteLine("How many constraits are there");
         int consNum = Convert.ToInt32(Console.ReadLine())+1; //column num
         

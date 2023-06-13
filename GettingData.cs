@@ -19,8 +19,16 @@ namespace Matric_Prelims
             Console.WriteLine("What are the coeffients for the objective function?");
             for (int i = 0; i < desVar; i++)
             {
-                Console.WriteLine("Enter coeffient for variable: " + i);
-                conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
+                if(i != desVar - 1)
+                {
+                    Console.WriteLine("Enter coeffient for variable: " + (i + 1));
+                    conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
+                }else
+                {
+                    Console.WriteLine("Enter z value: ");
+                    conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
+                }
+                
             }
 
             Console.WriteLine("What are the coeffients for the constraints?");
@@ -28,8 +36,17 @@ namespace Matric_Prelims
             {
                 for (int j = 0; j < desVar; j++)
                 {
-                    Console.WriteLine("Enter coeffient for constraint variable: " + m + " " + j);
-                    conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
+                    if(j != desVar - 1)
+                    {
+                        Console.WriteLine("Enter coeffient for constraint number " + (m) + ", Decision Variable " + (j + 1));
+                        conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter coeffient of Z value for constraint number " + (m));
+                        conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
+                    }
+                    
                 }
             }
 
@@ -40,11 +57,13 @@ namespace Matric_Prelims
         {
             string[] headingArr = new string[desVar];
 
-            for (int i = 0; i < desVar; i++)
+            for (int i = 0; i < desVar-1; i++)
             {
                 Console.WriteLine("Enter Variable Heading for: " + i);
                 headingArr[i] = Console.ReadLine();
             }
+
+            headingArr[headingArr.Length-1] = "z";
 
             return headingArr;
         }
@@ -76,15 +95,40 @@ namespace Matric_Prelims
         public string[] GetXbvHeadings()
         {
             Console.WriteLine("Enter how many basic variables there are");
-            int numXbvValues = Convert.ToInt32(Console.ReadLine());
-            string[] xbvValue = new string[numXbvValues];
+            //    int numXbvValues = Convert.ToInt32(Console.ReadLine());
+            //    string[] xbvValue = new string[numXbvValues];
 
-            for (int i = 0; i < numXbvValues; i++)
+            //    for (int i = 0; i < numXbvValues; i++)
+            //    {
+            //        Console.WriteLine("Enter the heading of the Basic Variable");
+            //        xbvValue[i] = Console.ReadLine();
+            //    }
+
+            string[] xbvValue = null;
+            bool flagOuter = true;
+            while (true)
             {
-                Console.WriteLine("Enter the heading of the Basic Variable");
-                xbvValue[i] = Console.ReadLine();
+                try
+                {
+                    int numXbvValues = Convert.ToInt32(Console.ReadLine());
+                    xbvValue = new string[numXbvValues];
+                    
+                    for (int i = 0; i < numXbvValues; i++)
+                    {
+                        Console.WriteLine("Enter the heading of the Basic Variable");
+                        xbvValue[i] = Console.ReadLine();
+                        if(i == numXbvValues - 1)
+                        {
+                            flagOuter = false;
+                        }
+                            
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Enter a proper Value");
+                }
             }
-
             return xbvValue;
         }
 
@@ -185,17 +229,6 @@ namespace Matric_Prelims
 
             return result;
 
-        }
-
-        public double[,] GetTableAns(int consNum)
-        {
-            double[,] ansVal = new double[consNum, 1];
-            for (int i = 0; i < consNum; i++)
-            {
-                Console.WriteLine("Enter answer for constraint: " + i);
-                ansVal[i, 1] = Convert.ToDouble(Console.ReadLine());
-            }
-            return ansVal;
         }
     }
 }
