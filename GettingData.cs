@@ -47,27 +47,40 @@ namespace Matric_Prelims
                 }
             }
 
-            
-           
-            Console.WriteLine("What are the coeffients for the constraints?");
-            for (int m = 1; m < consNum; m++)
-            {
-                for (int j = 0; j < desVar; j++)
-                {
-                    if(j != desVar - 1)
-                    {
-                        Console.WriteLine("Enter coeffient for constraint number " + (m) + ", Decision Variable " + (j + 1));
-                        conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
-                    }
-                    else
-                    {
-                        Console.WriteLine("Enter coeffient of Z value for constraint number " + (m));
-                        conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
-                    }
-                    
-                }
-            }
 
+            flag = true;
+            while(flag)
+            {
+                try
+                {
+                    Console.WriteLine("What are the coeffients for the constraints?");
+                    for (int m = 1; m < consNum; m++)
+                    {
+                        for (int j = 0; j < desVar; j++)
+                        {
+                            if (j != desVar - 1)
+                            {
+                                Console.WriteLine("Enter coeffient for constraint number " + (m) + ", Decision Variable " + (j + 1));
+                                conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
+                            }
+                            else
+                            {
+                                Console.WriteLine("Enter coeffient of Z value for constraint number " + (m));
+                                conicalArr[m, j] = Convert.ToDouble(Console.ReadLine());
+                                if (m == (consNum - 1) && j == (desVar - 1))
+                                    flag = false;
+                            }
+
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Enter a number");
+                }
+                
+            }
+            
             return conicalArr;
         }
 
@@ -77,7 +90,7 @@ namespace Matric_Prelims
 
             for (int i = 0; i < desVar-1; i++)
             {
-                Console.WriteLine("Enter Variable Heading for: " + i);
+                Console.WriteLine("Enter Variable Heading for: " + (i+1));
                 headingArr[i] = Console.ReadLine();
             }
 
