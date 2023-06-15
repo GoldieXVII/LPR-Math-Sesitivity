@@ -39,7 +39,7 @@ internal class Program
 
         double det = matrixMaths.GetDeterminant(bVal, n);
         double[,] inverseMatrix = null;
-        Console.WriteLine("Determinant: " + det);
+        Console.WriteLine("Determinant:\n" + det);
         if (det == 0)
         {
             Console.WriteLine("Inverse does not exist. Matrix is not invertible.");

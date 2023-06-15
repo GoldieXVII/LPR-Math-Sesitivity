@@ -15,22 +15,40 @@ namespace Matric_Prelims
         {
 
             double[,] conicalArr = new double[consNum, desVar];
+            bool flag = true;
+            Console.WriteLine("Please note if you dont enter a number you will have to start again");
+            Console.WriteLine("Please you a \",\"and not a \".\"");
+            Console.WriteLine();
 
-            Console.WriteLine("What are the coeffients for the objective function?");
-            for (int i = 0; i < desVar; i++)
+            while (flag)
             {
-                if(i != desVar - 1)
+                try
                 {
-                    Console.WriteLine("Enter coeffient for variable: " + (i + 1));
-                    conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
-                }else
-                {
-                    Console.WriteLine("Enter z value: ");
-                    conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("What are the coeffients for the objective function?");
+                    for (int i = 0; i < desVar; i++)
+                    {
+                        if (i != desVar - 1)
+                        {
+                            Console.WriteLine("Enter coeffient for variable: " + (i + 1));
+                            conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter z value: ");
+                            conicalArr[0, i] = Convert.ToDouble(Console.ReadLine());
+                            flag = false;
+                        }
+
+                    }
                 }
-                
+                catch (Exception)
+                {
+                    Console.WriteLine("Enter a number");
+                }
             }
 
+            
+           
             Console.WriteLine("What are the coeffients for the constraints?");
             for (int m = 1; m < consNum; m++)
             {
