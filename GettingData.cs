@@ -92,37 +92,46 @@ namespace Matric_Prelims
             Console.WriteLine();
         }
 
-        public string[] GetXbvHeadings()
+        public string[] GetXbvHeadings(string[] headings)
         {
             Console.WriteLine("Enter how many basic variables there are");
-            //    int numXbvValues = Convert.ToInt32(Console.ReadLine());
-            //    string[] xbvValue = new string[numXbvValues];
-
-            //    for (int i = 0; i < numXbvValues; i++)
-            //    {
-            //        Console.WriteLine("Enter the heading of the Basic Variable");
-            //        xbvValue[i] = Console.ReadLine();
-            //    }
 
             string[] xbvValue = null;
             bool flagOuter = true;
-            while (true)
+            
+            while (flagOuter == true)
             {
                 try
                 {
                     int numXbvValues = Convert.ToInt32(Console.ReadLine());
                     xbvValue = new string[numXbvValues];
-                    
+
                     for (int i = 0; i < numXbvValues; i++)
                     {
-                        Console.WriteLine("Enter the heading of the Basic Variable");
-                        xbvValue[i] = Console.ReadLine();
-                        if(i == numXbvValues - 1)
+                        string temp;
+                        bool found;
+
+                        do
+                        {
+                            Console.WriteLine("Enter the heading of the Basic Variable");
+                            temp = Console.ReadLine();
+
+                            found = ArrayContainsValue(headings, temp);
+
+                            if(!found)
+                            {
+                                Console.WriteLine("Enter a heading that exisits");
+                            }    
+                        } while (!found);
+                        
+                        xbvValue[i] = temp;
+                        
+                        if (i == numXbvValues - 1)
                         {
                             flagOuter = false;
                         }
-                            
-                    }
+
+                    }                    
                 }
                 catch (Exception)
                 {
@@ -130,6 +139,18 @@ namespace Matric_Prelims
                 }
             }
             return xbvValue;
+        }
+
+        private static bool ArrayContainsValue(string[] array, string value)
+        {
+            foreach (string element in array)
+            {
+                if (element.Equals(value, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private int[] gettingIndicies(string[] headings, string [] headingLook)

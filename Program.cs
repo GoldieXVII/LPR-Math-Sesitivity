@@ -21,7 +21,7 @@ internal class Program
         //Entering XBv value headings
         getData.DisplayHeadings(headings);
         DisplayMatrix(modelArr);;
-        string[] xbv = getData.GetXbvHeadings();
+        string[] xbv = getData.GetXbvHeadings(headings);
         double[,] bVal = getData.GetBValues(headings, xbv, modelArr, consNum);
         Console.WriteLine();
         Console.WriteLine();
