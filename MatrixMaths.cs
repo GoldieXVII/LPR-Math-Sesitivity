@@ -109,5 +109,36 @@ namespace Matric_Prelims
             return transposeMatrix;
         }
 
+        public double[] GetCBVB1(double[] CBv, double[,] Inversematrix)
+        {
+            int vectorSize = CBv.Length;
+            int numCols = Inversematrix.GetLength(1);
+
+            //if (vectorSize != Inversematrix.GetLength(0))
+            //{
+            //    throw new ArgumentException("The length of the vector must be equal to the number of rows in the matrix.");
+            //}
+
+            double[] result = new double[numCols];
+
+            for (int j = 0; j < numCols; j++)
+            {
+                double sum = 0;
+                for (int i = 0; i < vectorSize; i++)
+                {
+                    sum += CBv[i] * Inversematrix[i, j];
+                }
+                result[j] = sum;
+            }
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                Console.Write(result[i] + "\t");
+            }
+
+            return result;
+
+        }
+
     }
 }

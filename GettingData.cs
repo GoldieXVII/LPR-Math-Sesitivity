@@ -208,7 +208,7 @@ namespace Matric_Prelims
             
         }
 
-        public double[,] GetBValues(string[] headings, string [] headingLook, double[,] orArr, int consNum)
+        public double[,] GetB1Values(string[] headings, string [] headingLook, double[,] orArr, int consNum)
         {
          
             int [] indicies = gettingIndicies(headings, headingLook);
@@ -252,35 +252,14 @@ namespace Matric_Prelims
             return cBv;
         }
 
-        public double[] GetCBVB1 (double[] CBv, double[,] Inversematrix)
+        public double[,] getAValue (string[] headings, double[,] orArr)
         {
-            int vectorSize = CBv.Length;
-            int numCols = Inversematrix.GetLength(1);
+            int colNum = orArr.GetLength(0)-1;
+            double[,] aVal = new double[colNum,1];
 
-            if (vectorSize != Inversematrix.GetLength(0))
-            {
-                throw new ArgumentException("The length of the vector must be equal to the number of rows in the matrix.");
-            }
-
-            double[] result = new double[numCols];
-
-            for (int j = 0; j < numCols; j++)
-            {
-                double sum = 0;
-                for (int i = 0; i < vectorSize; i++)
-                {
-                    sum += CBv[i] * Inversematrix[i, j];
-                }
-                result[j] = sum;
-            }
-
-            for(int i = 0; i < result.Length; i++)
-            {
-                Console.Write(result[i] + "\t");
-            }
-
-            return result;
-
+            return aVal;
         }
+
+        
     }
 }

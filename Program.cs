@@ -16,13 +16,13 @@ internal class Program
         
         //original lp
         double[,] modelArr = getData.SetModel(desVar, consNum);
-        string[] headings = getData.GetHeadings(desVar, consNum);
+        string[] headings = getData.GetHeadings(desVar, consNum); 
+        getData.DisplayHeadings(headings);
+        DisplayMatrix(modelArr);
 
         //Entering XBv value headings
-        getData.DisplayHeadings(headings);
-        DisplayMatrix(modelArr);;
         string[] xbv = getData.GetXbvHeadings(headings);
-        double[,] bVal = getData.GetBValues(headings, xbv, modelArr, consNum);
+        double[,] bVal = getData.GetB1Values(headings, xbv, modelArr, consNum);
         Console.WriteLine();
         Console.WriteLine();
         DisplayMatrix(bVal);
@@ -53,7 +53,7 @@ internal class Program
         }
 
         double[] cbv = getData.getCBv(headings, xbv, modelArr);
-        double[] cbvb1 = getData.GetCBVB1(cbv, inverseMatrix);
+        double[] cbvb1 = matrixMaths.GetCBVB1(cbv, inverseMatrix);
 
 
     }
